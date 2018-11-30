@@ -1,8 +1,16 @@
 {
   "name": "react-playground",
   "version": "0.1.0",
-  "private": true,
+  "description": "React experiments",
+  "author": {
+    "name": "Paolo Leopardi",
+    "email": "leopardipaolo@gmail.com",
+    "url": "https://www.paololeopardi.com/"
+  },
+  "private": false,
   "dependencies": {
+    "@reach/router": "^1.2.1",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
