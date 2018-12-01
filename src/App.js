@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
-import { Carousel, Home } from "./pages";
+import { Home } from "./pages";
+import { Carousel } from "./experiments";
 
 class App extends Component {
   render() {
