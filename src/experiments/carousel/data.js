@@ -40,3 +40,7 @@ export const colors = [
   { name: "Wheat", value: "#F5DEB3" },
   { name: "Quincy", value: "#624A3E" }
 ];
+
+export const slideWidth = 85;
+
+export const swiperWidth = 675;
