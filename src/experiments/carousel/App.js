@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { colors } from "./";
-import { NukaCarousel } from "./";
+import { colors, slideWidth, swiperWidth } from "./data";
+import NukaCarousel from "./NukaCarousel";
 import { RoundedColor } from "../../components";
+import SwiperCarousel from "./SwiperCarousel";
 
 const styles = {
   carousel: {
     overflow: "hidden",
-    width: 675
+    width: swiperWidth
   },
   container: {
     alignItems: "center",
@@ -16,6 +17,12 @@ const styles = {
   },
   containerCustomStyle: {
     margin: "10px 20px"
+  },
+  slide: {
+    width: slideWidth
+  },
+  swiper: {
+    width: swiperWidth
   }
 };
 
@@ -30,37 +37,76 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentIndex: 0
+      nukaIndex: 0,
+      swiperIndex: 0
     };
 
-    this.handleSlide = this.handleSlide.bind(this);
+    this.handleNukaSlide = this.handleNukaSlide.bind(this);
+    this.setSlideIndex = this.setSlideIndex.bind(this);
   }
 
-  handleSlide(currentIndex) {
+  handleNukaSlide(currentIndex) {
+    this.handleSlide("nukaIndex", currentIndex);
+  }
+
+  handleSlide(key, currentIndex) {
     this.setState(() => {
-      return { currentIndex };
+      return { [key]: currentIndex };
+    });
+  }
+
+  handleSwiperSlide(currentIndex) {
+    this.handleSlide("swiperIndex", currentIndex);
+  }
+
+  /**
+   * @description setSlideIndex is called by each Slide component
+   * to bind the "currentIndex" argument of handleSwiperSlide to
+   * the current slide index.
+   * @param {number} slideIndex
+   */
+  setSlideIndex(slideIndex) {
+    return this.handleSwiperSlide.bind(this, slideIndex);
+  }
+
+  renderSlides() {
+    return colors.map(({ name, value }) => {
+      return (
+        <RoundedColor
+          key={value}
+          color={value}
+          containerCustomStyle={styles.containerCustomStyle}
+          onClick={logName(name)}
+        />
+      );
     });
   }
 
   render() {
-    const { currentIndex } = this.state;
+    const { nukaIndex, swiperIndex } = this.state;
 
     return (
       <div style={styles.container}>
-        <h1>{`Current color: ${colors[currentIndex].name}`}</h1>
+        <h1>nuka-carousel</h1>
+        <h3>{`Current color: ${colors[nukaIndex].name}`}</h3>
         <div style={styles.carousel}>
-          <NukaCarousel afterSlide={this.handleSlide}>
-            {colors.map(({ name, value }) => {
-              return (
-                <RoundedColor
-                  key={value}
-                  color={value}
-                  containerCustomStyle={styles.containerCustomStyle}
-                  onClick={logName(name)}
-                />
-              );
-            })}
+          <NukaCarousel
+            afterSlide={this.handleNukaSlide}
+            slideWidth={`${slideWidth}px`}
+          >
+            {this.renderSlides()}
           </NukaCarousel>
+        </div>
+        <h1>react-dynamic-swiper</h1>
+        <h3>{`Current color: ${colors[swiperIndex].name}`}</h3>
+        <div style={styles.carousel}>
+          <SwiperCarousel
+            onActive={this.setSlideIndex}
+            slideStyle={styles.slide}
+            swiperStyle={styles.swiper}
+          >
+            {this.renderSlides()}
+          </SwiperCarousel>
         </div>
       </div>
     );
