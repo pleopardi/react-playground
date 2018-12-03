@@ -26,6 +26,17 @@ const styles = {
   }
 };
 
+const slides = colors.map(({ name, value }) => {
+  return (
+    <RoundedColor
+      key={value}
+      color={value}
+      containerCustomStyle={styles.containerCustomStyle}
+      onClick={logName(name)}
+    />
+  );
+});
+
 function logName(name) {
   return function() {
     console.log(name);
@@ -69,19 +80,6 @@ class App extends Component {
     return this.handleSwiperSlide.bind(this, slideIndex);
   }
 
-  renderSlides() {
-    return colors.map(({ name, value }) => {
-      return (
-        <RoundedColor
-          key={value}
-          color={value}
-          containerCustomStyle={styles.containerCustomStyle}
-          onClick={logName(name)}
-        />
-      );
-    });
-  }
-
   render() {
     const { nukaIndex, swiperIndex } = this.state;
 
@@ -94,7 +92,7 @@ class App extends Component {
             afterSlide={this.handleNukaSlide}
             slideWidth={`${slideWidth}px`}
           >
-            {this.renderSlides()}
+            {slides}
           </NukaCarousel>
         </div>
         <h1>react-dynamic-swiper (v)</h1>
@@ -105,7 +103,7 @@ class App extends Component {
             slideStyle={styles.slide}
             swiperStyle={styles.swiper}
           >
-            {this.renderSlides()}
+            {slides}
           </SwiperCarousel>
         </div>
       </div>
