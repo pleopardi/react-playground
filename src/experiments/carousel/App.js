@@ -97,7 +97,7 @@ class App extends Component {
             {this.renderSlides()}
           </NukaCarousel>
         </div>
-        <h1>react-dynamic-swiper</h1>
+        <h1>react-dynamic-swiper (v)</h1>
         <h3>{`Current color: ${colors[swiperIndex].name}`}</h3>
         <div style={styles.carousel}>
           <SwiperCarousel
