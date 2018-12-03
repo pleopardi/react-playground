@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Carousel from "nuka-carousel";
 import { colors } from "./";
+import { NukaCarousel } from "./";
 import { RoundedColor } from "../../components";
 
 const styles = {
@@ -49,16 +49,7 @@ class App extends Component {
       <div style={styles.container}>
         <h1>{`Current color: ${colors[currentIndex].name}`}</h1>
         <div style={styles.carousel}>
-          <Carousel
-            afterSlide={this.handleSlide}
-            cellAlign="center"
-            dragging
-            frameOverflow="visible"
-            slidesToShow={1}
-            slideWidth="85px"
-            swiping
-            withoutControls
-          >
+          <NukaCarousel afterSlide={this.handleSlide}>
             {colors.map(({ name, value }) => {
               return (
                 <RoundedColor
@@ -69,7 +60,7 @@ class App extends Component {
                 />
               );
             })}
-          </Carousel>
+          </NukaCarousel>
         </div>
       </div>
     );

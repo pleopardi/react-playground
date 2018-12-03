@@ -1,2 +1,3 @@
-export { default } from './App';
-export * from './data';
+export { default } from "./App";
+export { default as NukaCarousel } from "./NukaCarousel";
+export * from "./data";
