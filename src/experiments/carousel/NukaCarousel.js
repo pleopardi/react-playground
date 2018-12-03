@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Carousel from "nuka-carousel";
 
-function NukaCarousel({ afterSlide, children, ...others }) {
+function NukaCarousel({ afterSlide, children, slideWidth, ...others }) {
   return (
     <Carousel
       afterSlide={afterSlide}
@@ -10,7 +10,7 @@ function NukaCarousel({ afterSlide, children, ...others }) {
       dragging
       frameOverflow="visible"
       slidesToShow={1}
-      slideWidth="85px"
+      slideWidth={slideWidth}
       swiping
       withoutControls
       {...others}
@@ -22,7 +22,12 @@ function NukaCarousel({ afterSlide, children, ...others }) {
 
 NukaCarousel.propTypes = {
   afterSlide: PropTypes.func,
-  children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired
+  children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
+  slideWidth: PropTypes.string
+};
+
+NukaCarousel.defaultProps = {
+  slideWidth: "85px"
 };
 
 export default NukaCarousel;
