@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { colors, slideWidth, swiperWidth } from "./data";
-import NukaCarousel from "./NukaCarousel";
+import { NukaCarousel, SwiperCarousel } from "./";
 import { RoundedColor } from "../../components";
-import SwiperCarousel from "./SwiperCarousel";
 
 const styles = {
   carousel: {
