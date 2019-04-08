@@ -12,6 +12,9 @@ function Home() {
         <li>
           <Link to="/carousel">Carousel</Link>
         </li>
+        <li>
+          <Link to="/polaris">Polaris</Link> (Shopify's Polaris UI)
+        </li>
       </ul>
     </div>
   );
