@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Router } from "@reach/router";
 import { Home } from "./pages";
-import { Canvas, Carousel, Polaris } from "./experiments";
+import { Canvas, Carousel, PdfGeneration, Polaris } from "./experiments";
 
 class App extends Component {
   render() {
@@ -13,6 +13,7 @@ class App extends Component {
           <Home path="/" />
           <Canvas path="/canvas" />
           <Carousel path="/carousel" />
+          <PdfGeneration path="/pdf" />
           <Polaris path="/polaris" />
         </Router>
       </Fragment>

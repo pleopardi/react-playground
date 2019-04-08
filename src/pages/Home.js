@@ -13,6 +13,9 @@ function Home() {
           <Link to="/carousel">Carousel</Link>
         </li>
         <li>
+          <Link to="/pdf">Pdf generation</Link> (jsPDF)
+        </li>
+        <li>
           <Link to="/polaris">Polaris</Link> (Shopify's Polaris UI)
         </li>
       </ul>

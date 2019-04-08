@@ -17,6 +17,7 @@
     "@types/reach__router": "^1.2.2",
     "axios": "^0.18.0",
     "emotion": "^10.0.0",
+    "jspdf": "^1.5.3",
     "konva": "^2.5.1",
     "nuka-carousel": "^4.4.3",
     "prop-types": "@latest",
