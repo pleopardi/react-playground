@@ -13,10 +13,13 @@ function Home() {
           <Link to="/carousel">Carousel</Link>
         </li>
         <li>
-          <Link to="/pdf">Pdf generation</Link> (jsPDF)
+          <Link to="/pdf">PDF Generation</Link> (jsPDF)
         </li>
         <li>
           <Link to="/polaris">Polaris</Link> (Shopify's Polaris UI)
+        </li>
+        <li>
+          <Link to="/threejs">Three.js Scene</Link>
         </li>
       </ul>
     </div>
