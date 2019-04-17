@@ -1,5 +1,5 @@
 import React, { Component, createRef, Fragment } from "react";
-import DimensionsBar from "./DimensionsBar";
+import DimensionsPanel from "./DimensionsPanel";
 import Scene from "./Scene";
 import threeJSScene from "./threeJSScene";
 
@@ -9,11 +9,18 @@ class SceneContainer extends Component {
 
     this.sceneRef = createRef();
 
-    this.handleSetDimensions = this.handleSetDimensions.bind(this);
+    this.dimensions = ["x", "y", "z"].map(axis => ({
+      handleDimensionChange: this.handleSetDimension.bind(this, axis),
+      label: `${axis} size (mm):`
+    }));
   }
 
-  handleSetDimensions(x, y, z) {
-    this.scene.setDimensions(x, y, z);
+  handleSetDimension(axis, event) {
+    this.handleSetDimensions({ [axis]: parseInt(event.target.value, 10) });
+  }
+
+  handleSetDimensions({ x, y, z }) {
+    this.scene.setDimensions({ x, y, z });
   }
 
   componentDidMount() {
@@ -25,7 +32,7 @@ class SceneContainer extends Component {
     return (
       <Fragment>
         <Scene sceneRef={this.sceneRef} />
-        <DimensionsBar handleSetDimensions={this.handleSetDimensions} />
+        <DimensionsPanel dimensions={this.dimensions} />
       </Fragment>
     );
   }

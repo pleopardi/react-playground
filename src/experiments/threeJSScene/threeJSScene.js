@@ -50,14 +50,10 @@ export default function threeJSScene(element) {
 
       animate();
     },
-    setDimensions(
-      newXSize = currentXSize,
-      newYSize = currentYSize,
-      newZSize = currentZSize
-    ) {
-      currentXSize = newXSize;
-      currentYSize = newYSize;
-      currentZSize = newZSize;
+    setDimensions({ x = currentXSize, y = currentYSize, z = currentZSize }) {
+      currentXSize = x;
+      currentYSize = y;
+      currentZSize = z;
 
       model.scale.set(
         currentXSize / initialXSize,
