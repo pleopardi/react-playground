@@ -7,31 +7,63 @@ import {
   WebGLRenderer
 } from "three";
 
-export function init(element) {
-  const { height, width } = element.getBoundingClientRect();
+export default function threeJSScene(element) {
+  const initialXSize = 80;
+  const initialYSize = 80;
+  const initialZSize = 80;
 
-  const scene = new Scene();
-  const camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
+  let currentXSize = initialXSize;
+  let currentYSize = initialYSize;
+  let currentZSize = initialZSize;
 
-  const renderer = new WebGLRenderer();
-  renderer.setSize(width, height);
-  element.appendChild(renderer.domElement);
+  let model;
+  let scene;
 
-  const geometry = new BoxGeometry(1, 1, 1);
-  const material = new MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new Mesh(geometry, material);
-  scene.add(cube);
+  return {
+    init() {
+      const { height, width } = element.getBoundingClientRect();
 
-  camera.position.z = 5;
+      scene = new Scene();
+      const camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
 
-  function animate() {
-    requestAnimationFrame(animate);
+      const renderer = new WebGLRenderer();
+      renderer.setSize(width, height);
+      element.appendChild(renderer.domElement);
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+      const geometry = new BoxGeometry(1, 1, 1);
+      const material = new MeshBasicMaterial({ color: 0x00ff00 });
 
-    renderer.render(scene, camera);
+      model = new Mesh(geometry, material);
+
+      scene.add(model);
+
+      camera.position.z = 5;
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        model.rotation.x += 0.01;
+        model.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    },
+    setDimensions(
+      newXSize = currentXSize,
+      newYSize = currentYSize,
+      newZSize = currentZSize
+    ) {
+      currentXSize = newXSize;
+      currentYSize = newYSize;
+      currentZSize = newZSize;
+
+      model.scale.set(
+        currentXSize / initialXSize,
+        currentYSize / initialYSize,
+        currentZSize / initialZSize
+      );
+    }
   };
-
-  animate();
 }
