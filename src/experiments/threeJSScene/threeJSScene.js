@@ -4,6 +4,7 @@ import {
   Box3,
   Color,
   DoubleSide,
+  MeshBasicMaterial,
   MeshLambertMaterial,
   ObjectLoader,
   PerspectiveCamera,
@@ -12,6 +13,10 @@ import {
   WebGLRenderer
 } from "three";
 import { OrbitControls } from "./controls/OrbitControls";
+
+function loadTexture(texture) {
+  return new TextureLoader().load(texture);
+}
 
 export default function threeJSScene(element) {
   let scaleFactor;
@@ -43,9 +48,7 @@ export default function threeJSScene(element) {
       element.appendChild(renderer.domElement);
 
       const material = new MeshLambertMaterial({
-        map: new TextureLoader().load(
-          "http://localhost:3000/assets/threejs/wall.jpg"
-        ),
+        map: loadTexture("http://localhost:3000/assets/threejs/wall.jpg"),
         side: DoubleSide
       });
 
@@ -59,16 +62,21 @@ export default function threeJSScene(element) {
         // Here the loaded data is assumed to be an object
         function(object) {
           model = object;
-          const boundingBox = new Box3().setFromObject(object);
+          const boundingBox = new Box3().setFromObject(model);
           const maxSize = Math.max(...Object.values(boundingBox.getSize()));
 
           scaleFactor = 1 / maxSize;
 
-          object.scale.set(1, 1, 1);
-          object.rotation.set(0, -Math.PI / 3, 0);
-          object.position.set(0, 0, 0);
-          object.material = material;
-          scene.add(object);
+          model.scale.set(1, 1, 1);
+          model.rotation.y = -Math.PI / 3;
+          model.material = new MeshBasicMaterial({
+            color: 0xa0a0a0
+          });
+          scene.add(model);
+
+          setTimeout(() => {
+            model.material = material;
+          }, 1000);
         }
       );
 
@@ -94,6 +102,12 @@ export default function threeJSScene(element) {
         currentYSize * scaleFactor,
         currentZSize * scaleFactor
       );
+    },
+    setMaterial(texture) {
+      model.material = new MeshLambertMaterial({
+        map: loadTexture(texture),
+        side: DoubleSide
+      });
     }
   };
 }
