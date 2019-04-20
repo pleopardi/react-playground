@@ -4,8 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   sceneContainer: {
-    height: 400,
-    width: 400
+    height: 800,
+    width: 1200
   }
 };
 
