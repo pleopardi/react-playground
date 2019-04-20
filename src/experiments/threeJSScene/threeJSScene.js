@@ -48,7 +48,7 @@ export default function threeJSScene(element) {
       element.appendChild(renderer.domElement);
 
       const material = new MeshLambertMaterial({
-        map: loadTexture("http://localhost:3000/assets/threejs/wall.jpg"),
+        map: loadTexture("/assets/threejs/wall.jpg"),
         side: DoubleSide
       });
 
@@ -56,7 +56,7 @@ export default function threeJSScene(element) {
 
       loader.load(
         // resource URL
-        "http://localhost:3000/assets/threejs/box.json",
+        "/assets/threejs/box.json",
 
         // onLoad callback
         // Here the loaded data is assumed to be an object
