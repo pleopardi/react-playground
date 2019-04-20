@@ -16,7 +16,7 @@ class SceneContainer extends Component {
   }
 
   handleSetDimension(axis, event) {
-    this.handleSetDimensions({ [axis]: parseInt(event.target.value, 10) });
+    this.handleSetDimensions({ [axis]: parseFloat(event.target.value) });
   }
 
   handleSetDimensions({ x, y, z }) {
